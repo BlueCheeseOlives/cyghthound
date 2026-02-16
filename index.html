@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CyghtHound is an SDVOSB IT Services & Consulting firm delivering secure cloud, cybersecurity, and mission-ready IT modernization." />
+  <title>CyghtHound | SDVOSB IT Services & Consulting</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.08);
+      --text:#EAF0FF;
+      --muted:rgba(234,240,255,.72);
+      --muted2:rgba(234,240,255,.56);
+      --line:rgba(255,255,255,.12);
+      --accent:#7CFFCB;
+      --accent2:#7AA7FF;
+      --warn:#FFCE5C;
+      --shadow: 0 30px 70px rgba(0,0,0,.45);
+      --shadow2: 0 12px 30px rgba(0,0,0,.35);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 20%, rgba(124,255,203,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(255,206,92,.10), transparent 60%),
+        linear-gradient(180deg, #070A12 0%, #050712 55%, #03040B 100%);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+
+    /* Layout */
+    .container{ width:min(1140px, 92vw); margin:0 auto; }
+    .grid{ display:grid; gap:20px; }
+    .two{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .three{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .four{ grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+    @media (max-width: 920px){
+      .two,.three,.four{ grid-template-columns: 1fr; }
+    }
+
+    /* Nav */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(7,10,18,.6);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+    }
+    .brand img{
+      width:44px; height:44px; object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      border-radius:10px;
+    }
+    .brand .name{
+      display:flex; flex-direction:column; line-height:1.1;
+    }
+    .brand .name strong{ font-weight:800; letter-spacing:.3px; }
+    .brand .name span{ font-size:12.5px; color:var(--muted2); }
+
+    .nav-links{
+      display:flex; gap:18px; align-items:center;
+      color:var(--muted);
+      font-weight:600;
+      font-size:13.5px;
+    }
+    .nav-links a{ padding:10px 10px; border-radius:10px; }
+    .nav-links a:hover{ background:rgba(255,255,255,.06); color:var(--text); }
+
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:800;
+      font-size:13.5px;
+      letter-spacing:.2px;
+      box-shadow: var(--shadow2);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.09); }
+    .btn.primary{
+      border:1px solid rgba(124,255,203,.35);
+      background: linear-gradient(135deg, rgba(124,255,203,.22), rgba(122,167,255,.16));
+    }
+    .btn.primary:hover{ background: linear-gradient(135deg, rgba(124,255,203,.28), rgba(122,167,255,.20)); }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:700;
+      font-size:12.5px;
+    }
+    .dot{ width:8px; height:8px; border-radius:99px; background: var(--accent); box-shadow:0 0 0 4px rgba(124,255,203,.12); }
+
+    /* Hero */
+    .hero{ padding:62px 0 10px; }
+    .hero-wrap{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero{ padding:42px 0 0; }
+      .hero-wrap{ grid-template-columns: 1fr; }
+    }
+
+    .headline{
+      font-size: clamp(34px, 4.2vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 900;
+      margin: 14px 0 12px;
+    }
+    .subhead{
+      color: var(--muted);
+      font-size: 16.5px;
+      line-height: 1.55;
+      margin: 0 0 22px;
+      max-width: 58ch;
+    }
+    .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+
+    .hero-card{
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(700px 300px at 20% 10%, rgba(124,255,203,.16), transparent 55%),
+        radial-gradient(700px 300px at 90% 20%, rgba(122,167,255,.14), transparent 60%),
+        rgba(255,255,255,.05);
+      border-radius:22px;
+      padding:18px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height: 280px;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(135deg, rgba(124,255,203,.18), rgba(122,167,255,.12), transparent 60%);
+      filter: blur(26px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .hero-card > *{ position:relative; }
+
+    .stat-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top: 14px;
+    }
+    .stat{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.12);
+      border-radius:16px;
+      padding:12px;
+    }
+    .stat .k{ font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:12px; color:var(--muted2); }
+    .stat .v{ font-weight:900; margin-top:6px; font-size:18px; letter-spacing:-.01em; }
+    .stat .s{ color:var(--muted); font-size:12.5px; margin-top:6px; line-height:1.35; }
+
+    /* Sections */
+    section{ padding: 70px 0; }
+    .section-title{ font-size: 26px; font-weight: 900; letter-spacing:-.01em; margin: 0 0 8px; }
+    .section-desc{ color: var(--muted); margin: 0 0 22px; max-width: 70ch; line-height:1.55; }
+
+    .card{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      border-radius:20px;
+      padding:18px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:hover{ border-color: rgba(255,255,255,.20); }
+
+    .card h3{ margin: 0 0 8px; font-size: 16px; font-weight: 900; letter-spacing:-.01em; }
+    .card p{ margin: 0; color: var(--muted); line-height: 1.55; font-size: 14px; }
+
+    .icon{
+      width:42px; height:42px;
+      display:grid; place-items:center;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(124,255,203,.14), rgba(122,167,255,.10));
+      margin-bottom:12px;
+      box-shadow: 0 12px 26px rgba(0,0,0,.28);
+    }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.10);
+      margin-right:8px;
+      margin-top:10px;
+    }
+
+    /* Process */
+    .step{
+      display:flex; gap:14px;
+    }
+    .step .n{
+      width:34px; height:34px;
+      border-radius:12px;
+      display:grid; place-items:center;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+      flex: 0 0 auto;
+    }
+    .step h4{ margin:2px 0 6px; font-size:15px; font-weight:900; }
+    .step p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.55; }
+
+    /* Footer */
+    footer{ padding: 40px 0 60px; border-top: 1px solid rgba(255,255,255,.10); }
+    .fine{ color:var(--muted2); font-size:12.5px; line-height:1.55; }
+
+    /* Mobile nav */
+    .menu-btn{ display:none; }
+    @media (max-width: 920px){
+      .nav-links{ display:none; }
+      .menu-btn{ display:inline-flex; }
+    }
+
+    .drawer{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      display:none;
+      align-items:flex-start;
+      justify-content:flex-end;
+      z-index:99;
+    }
+    .drawer.open{ display:flex; }
+    .drawer-panel{
+      width:min(380px, 92vw);
+      background: rgba(7,10,18,.92);
+      border-left:1px solid rgba(255,255,255,.10);
+      height:100%;
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    .drawer-panel a{
+      display:block;
+      padding:12px 12px;
+      border-radius:14px;
+      font-weight:800;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      margin-top:10px;
+    }
+    .drawer-panel a:hover{ color:var(--text); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.07); }
+
+    /* Subtle reveal */
+    .reveal{ opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.on{ opacity:1; transform:none; }
+
+    /* Forms */
+    label{ display:block; font-size:12.5px; color:var(--muted2); font-weight:700; margin:12px 0 6px; }
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color:var(--text);
+      outline:none;
+      font-family: inherit;
+      box-shadow: 0 10px 20px rgba(0,0,0,.20);
+    }
+    textarea{ min-height:120px; resize: vertical; }
+    input:focus, textarea:focus{ border-color: rgba(124,255,203,.35); box-shadow: 0 0 0 6px rgba(124,255,203,.10), 0 10px 20px rgba(0,0,0,.20); }
+
+    /* Cinematic Greyhound Visual */
+    .hound-visual{
+      position:relative;
+      padding:110px 0;
+      overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(800px 400px at 20% 50%, rgba(124,255,203,.18), transparent 60%),
+        radial-gradient(900px 500px at 80% 50%, rgba(122,167,255,.18), transparent 60%),
+        linear-gradient(135deg,#050712 0%, #0A0F1F 100%);
+    }
+
+    .hound-visual img{
+      position:absolute;
+      right:-80px;
+      bottom:-40px;
+      width:720px;
+      max-width:60vw;
+      opacity:.12;
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,.6));
+      transform: scale(1.05);
+      pointer-events:none;
+    }
+
+    .hound-video{
+      width:100%;
+      border-radius:20px;
+      overflow:hidden;
+      margin-bottom:28px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.12);
+      background:#000;
+    }
+
+    .hound-video video{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .hound-content{
+      position:relative;
+      z-index:2;
+      max-width:640px;
+    }
+
+    .hound-title{
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight:900;
+      line-height:1.02;
+      letter-spacing:-.02em;
+      margin:0 0 16px;
+      background: linear-gradient(90deg,#EAF0FF,#7CFFCB,#7AA7FF);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hound-sub{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.6;
+      margin-bottom:24px;
+    }
+
+    @media (max-width:920px){
+      .hound-visual{
+        padding:80px 0;
+      }
+      .hound-visual img{
+        position:relative;
+        right:auto;
+        bottom:auto;
+        width:100%;
+        max-width:420px;
+        margin:40px auto 0;
+        display:block;
+        opacity:.18;
+      }
+    }
+
+    /* Skip link */
+    .skip{ position:absolute; left:-999px; top:0; }
+    .skip:focus{ left:12px; top:12px; background:#000; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.2); z-index:999; }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <div class="brand">
+          <img src="CyghtHound.JPG" alt="CyghtHound logo" />
+          <div class="name">
+            <strong>CyghtHound</strong>
+            <span>SDVOSB • IT Services & Consulting</span>
+          </div>
+        </div>
+        <button class="btn" id="closeMenu" type="button">Close</button>
+      </div>
+      <div style="margin-top:16px;">
+        <a href="#services">Services</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn primary" style="margin-top:14px; display:flex;">Request a consult</a>
+      </div>
+      <p class="fine" style="margin-top:18px;">Tip: Place <strong>CyghtHound.JPG</strong> in the same folder as this HTML file so the logo loads automatically.</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="CyghtHound home">
+        <img src="CyghtHound.JPG" alt="CyghtHound logo" />
+        <div class="name">
+          <strong>CyghtHound</strong>
+          <span>SDVOSB • IT Services & Consulting</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn" href="#contact" aria-label="Get capabilities statement">Capabilities</a>
+        <a class="btn primary" href="#contact" aria-label="Request a consultation">Request a consult</a>
+        <button class="btn menu-btn" id="openMenu" type="button" aria-label="Open menu">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container hero-wrap">
+        <div>
+          <div class="pill reveal"><span class="dot"></span> Veteran-led SDVOSB delivering secure, mission-ready IT</div>
+          <h1 class="headline reveal" style="transition-delay:.06s">
+            Cybersecurity-first IT modernization that ships.
+          </h1>
+          <p class="subhead reveal" style="transition-delay:.12s">
+            CyghtHound helps Federal, SLED, and commercial teams harden systems, modernize infrastructure, and operationalize security.
+            We move fast, document everything, and leave you stronger than we found you.
+          </p>
+
+          <div class="hero-actions reveal" style="transition-delay:.18s">
+            <a class="btn primary" href="#contact">Book a 30-minute discovery call</a>
+            <a class="btn" href="#services">Explore services</a>
+            <a class="btn" href="#contact">Download capabilities (PDF)</a>
+          </div>
+
+          <div class="reveal" style="margin-top:20px; transition-delay:.24s">
+            <span class="badge">CMMC / NIST 800-171</span>
+            <span class="badge">Zero Trust</span>
+            <span class="badge">Cloud & DevSecOps</span>
+            <span class="badge">SOC / SIEM / SOAR</span>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal" style="transition-delay:.10s" aria-label="Highlights">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+            <div>
+              <div style="font-weight:900; font-size:16px; letter-spacing:-.01em;">What you get</div>
+              <div style="color:var(--muted); font-size:13.5px; margin-top:6px; line-height:1.5;">
+                Senior-level consulting, clean architecture, and measurable outcomes — without the bloat.
+              </div>
+            </div>
+            <div class="icon" aria-hidden="true">
+              <!-- Shield icon (inline SVG) -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l8 4v6c0 5-3.5 9.4-8 10-4.5-.6-8-5-8-10V6l8-4z" stroke="rgba(234,240,255,.92)" stroke-width="1.8"/>
+                <path d="M9.2 12.1l1.9 1.9 3.9-4.3" stroke="rgba(124,255,203,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="stat-grid" aria-label="Metrics">
+            <div class="stat">
+              <div class="k">Delivery</div>
+              <div class="v">Weeks, not quarters</div>
+              <div class="s">Rapid assessments, prioritized backlogs, and phased implementation.</div>
+            </div>
+            <div class="stat">
+              <div class="k">Security</div>
+              <div class="v">Built-in by default</div>
+              <div class="s">Threat modeling, hardening, logging, and controls mapped to frameworks.</div>
+            </div>
+            <div class="stat">
+              <div class="k">Operations</div>
+              <div class="v">Runbooks + KPIs</div>
+              <div class="s">SOC-ready playbooks, SLOs, dashboards, and change control.</div>
+            </div>
+            <div class="stat">
+              <div class="k">Acquisition</div>
+              <div class="v">SDVOSB-ready</div>
+              <div class="s">Prime or subcontract support; compliant documentation and deliverables.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Greyhound Visual Advertisement -->
+    <section class="hound-visual">
+      <div class="container">
+        <div class="hound-content">
+          <div class="hound-video">
+            <video src="video.mp4" autoplay muted loop playsinline></video>
+          </div>
+          <div class="pill"><span class="dot"></span> Precision. Speed. Relentless Focus.</div>
+          <h2 class="hound-title">CyghtHound — Hunt Risk. Secure Missions.</h2>
+          <p class="hound-sub">
+            Inspired by the speed and agility of the Italian Greyhound, CyghtHound delivers rapid cybersecurity execution, precision engineering, and relentless operational support for Federal, SLED, and commercial partners.
+          </p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <a class="btn primary" href="#contact">Engage CyghtHound</a>
+            <a class="btn" href="#services">View Capabilities</a>
+          </div>
+        </div>
+      </div>
+      <img src="CyghtHound.JPG" alt="CyghtHound Italian Greyhound" />
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title reveal">Services that reduce risk and accelerate delivery</h2>
+        <p class="section-desc reveal" style="transition-delay:.06s">
+          Choose focused engagements or retain us as an embedded expert team. Every engagement includes a clear scope, success metrics, and artifacts you can use.
+        </p>
+
+        <div class="grid three">
+          <div class="card reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4h16v16H4z" stroke="rgba(234,240,255,.92)" stroke-width="1.8"/>
+                <path d="M7 7h10M7 12h10M7 17h6" stroke="rgba(124,255,203,.95)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Cybersecurity Assessments</h3>
+            <p>Risk assessments, gap analysis (CMMC/NIST/ISO), threat modeling, and prioritized remediation roadmaps with measurable controls.</p>
+            <span class="badge">CMMC</span><span class="badge">NIST 800-171</span><span class="badge">ISO 27001</span>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.05s">
+            <div class="icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 20V10M12 20V4M17 20v-8" stroke="rgba(234,240,255,.92)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M4 20h16" stroke="rgba(124,255,203,.95)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Secure Cloud & DevSecOps</h3>
+            <p>Landing zones, IaC, CI/CD hardening, secrets management, and policy-as-code to ship features safely and repeatedly.</p>
+            <span class="badge">AWS / Azure</span><span class="badge">Terraform</span><span class="badge">Kubernetes</span>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.10s">
+            <div class="icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3v18" stroke="rgba(234,240,255,.92)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M3 12h18" stroke="rgba(124,255,203,.95)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M7 7l10 10" stroke="rgba(234,240,255,.72)" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M17 7L7 17" stroke="rgba(234,240,255,.72)" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Security Operations (SOC)</h3>
+            <p>SIEM engineering, detection-as-code, SOAR automation, incident response playbooks, and executive reporting that drives action.</p>
+            <span class="badge">SIEM</span><span class="badge">SOAR</span><span class="badge">IR</span>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.02s">
+            <div class="icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 7h8M6 11h12M8 15h8" stroke="rgba(234,240,255,.92)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M4 4h16v16H4z" stroke="rgba(124,255,203,.95)" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3>IT Modernization</h3>
+            <p>Network and endpoint modernization, identity consolidation, M365 hardening, and technical debt reduction with governance.</p>
+            <span class="badge">Zero Trust</span><span class="badge">Identity</span><span class="badge">M365</span>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.07s">
+            <div class="icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7h14" stroke="rgba(234,240,255,.92)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5 12h14" stroke="rgba(124,255,203,.95)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5 17h14" stroke="rgba(234,240,255,.72)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Program Delivery & PMO</h3>
+            <p>Roadmaps, technical requirements, vendor evaluation, and delivery leadership to keep teams aligned and outcomes on track.</p>
+            <span class="badge">Agile</span><span class="badge">Governance</span><span class="badge">Vendors</span>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.12s">
+            <div class="icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 21s-7-4.4-7-11a7 7 0 0 1 14 0c0 6.6-7 11-7 11z" stroke="rgba(234,240,255,.92)" stroke-width="1.8"/>
+                <path d="M9.5 10.5l1.6 1.6 3.6-3.9" stroke="rgba(124,255,203,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Compliance & Documentation</h3>
+            <p>Policies, SSP/POA&M support, evidence collection workflows, and audit-ready artifacts designed for real operations.</p>
+            <span class="badge">SSP</span><span class="badge">POA&M</span><span class="badge">ATO support</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions -->
+    <section id="solutions">
+      <div class="container">
+        <h2 class="section-title reveal">Solution packages (fast, scoped, outcome-driven)</h2>
+        <p class="section-desc reveal" style="transition-delay:.06s">
+          Pick a package when you want speed and clarity. Each includes a kickoff, weekly checkpoints, and a final handoff with artifacts.
+        </p>
+
+        <div class="grid three">
+          <div class="card reveal">
+            <h3>Zero Trust Starter</h3>
+            <p>Identity-first access, device posture, segmentation plan, and an actionable 90-day roadmap.</p>
+            <div style="margin-top:14px; color:var(--muted2); font-size:12.5px;">Deliverables</div>
+            <ul style="margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.6; font-size:13.5px;">
+              <li>Current-state architecture + gaps</li>
+              <li>Target-state blueprint</li>
+              <li>Control mapping + backlog</li>
+            </ul>
+          </div>
+          <div class="card reveal" style="transition-delay:.05s">
+            <h3>SOC Lift (30 Days)</h3>
+            <p>SIEM health check, tuned detections, and incident workflows that reduce alert fatigue and speed response.</p>
+            <div style="margin-top:14px; color:var(--muted2); font-size:12.5px;">Deliverables</div>
+            <ul style="margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.6; font-size:13.5px;">
+              <li>Detection tuning + suppression rules</li>
+              <li>Top use cases aligned to threats</li>
+              <li>IR runbooks + metrics dashboard</li>
+            </ul>
+          </div>
+          <div class="card reveal" style="transition-delay:.10s">
+            <h3>CMMC Readiness Sprint</h3>
+            <p>Define scope, validate controls, and stand up evidence workflows to reduce audit friction.</p>
+            <div style="margin-top:14px; color:var(--muted2); font-size:12.5px;">Deliverables</div>
+            <ul style="margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.6; font-size:13.5px;">
+              <li>Gap analysis + POA&M</li>
+              <li>SSP support + evidence plan</li>
+              <li>Control owners + timelines</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:18px; transition-delay:.08s">
+          <div class="grid two" style="align-items:center;">
+            <div>
+              <div class="pill"><span class="dot"></span> Government contracting-friendly delivery</div>
+              <h3 style="margin-top:12px; font-size:18px;">Need an SDVOSB partner for a proposal?</h3>
+              <p style="color:var(--muted); line-height:1.6; margin:0;">
+                We support primes and teams with technical narratives, architecture diagrams, compliance mappings, and delivery plans.
+              </p>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+              <a class="btn" href="#contact">Capability statement</a>
+              <a class="btn primary" href="#contact">Proposal support request</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process">
+      <div class="container">
+        <h2 class="section-title reveal">A process built for accountability</h2>
+        <p class="section-desc reveal" style="transition-delay:.06s">
+          No mystery. No endless discovery. You get clear decisions, visible progress, and artifacts your team can own.
+        </p>
+
+        <div class="grid three">
+          <div class="card reveal">
+            <div class="step">
+              <div class="n">1</div>
+              <div>
+                <h4>Discovery & scoping</h4>
+                <p>Define objectives, constraints, environments, and success metrics. Confirm what “done” means.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal" style="transition-delay:.05s">
+            <div class="step">
+              <div class="n">2</div>
+              <div>
+                <h4>Assess & prioritize</h4>
+                <p>Inventory, risk, and quick wins. Build a prioritized backlog mapped to cost, impact, and effort.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal" style="transition-delay:.10s">
+            <div class="step">
+              <div class="n">3</div>
+              <div>
+                <h4>Implement & document</h4>
+                <p>Ship improvements in phases. Every change includes diagrams, runbooks, and operational handoff.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal" style="transition-delay:.02s">
+            <div class="step">
+              <div class="n">4</div>
+              <div>
+                <h4>Operationalize</h4>
+                <p>Dashboards, alerting, SLOs, and incident workflows so improvements survive real-world operations.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal" style="transition-delay:.07s">
+            <div class="step">
+              <div class="n">5</div>
+              <div>
+                <h4>Validate controls</h4>
+                <p>Map evidence to frameworks and confirm controls actually work — not just “exist on paper.”</p>
+              </div>
+            </div>
+          </div>
+          <div class="card reveal" style="transition-delay:.12s">
+            <div class="step">
+              <div class="n">6</div>
+              <div>
+                <h4>Scale & iterate</h4>
+                <p>Repeatable patterns, templates, and automation to reduce toil and speed future delivery.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <div class="grid two" style="align-items:stretch;">
+          <div class="card reveal">
+            <h2 class="section-title" style="margin:0 0 8px;">Veteran-led. Security-first. Outcome-obsessed.</h2>
+            <p class="section-desc" style="margin:0;">
+              CyghtHound is an SDVOSB IT Services & Consulting firm. We bring a mission mindset to modern cyber, cloud, and operations.
+              Our standard deliverables include architecture diagrams, runbooks, and control mappings — so your team can sustain progress.
+            </p>
+            <div style="margin-top:14px;">
+              <span class="badge">SDVOSB</span>
+              <span class="badge">DoD / Federal-ready delivery</span>
+              <span class="badge">Clean documentation</span>
+              <span class="badge">High-trust collaboration</span>
+            </div>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.06s">
+            <h3 style="font-size:18px; margin:0 0 10px;">Why CyghtHound</h3>
+            <div class="grid" style="gap:12px;">
+              <div style="display:flex; gap:12px;">
+                <div class="icon" aria-hidden="true" style="width:38px;height:38px;border-radius:14px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17l-5-5" stroke="rgba(124,255,203,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:900;">Senior expertise, hands-on delivery</div>
+                  <div style="color:var(--muted); font-size:13.5px; line-height:1.55;">You get architects who implement — not slide-decks that die in a folder.</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:12px;">
+                <div class="icon" aria-hidden="true" style="width:38px;height:38px;border-radius:14px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3v18M3 12h18" stroke="rgba(122,167,255,.92)" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:900;">Security that supports speed</div>
+                  <div style="color:var(--muted); font-size:13.5px; line-height:1.55;">We design controls that help teams ship — with guardrails, not gridlock.</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:12px;">
+                <div class="icon" aria-hidden="true" style="width:38px;height:38px;border-radius:14px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 20h16" stroke="rgba(234,240,255,.85)" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M7 20V10M12 20V4M17 20v-8" stroke="rgba(255,206,92,.92)" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:900;">Measurable outcomes</div>
+                  <div style="color:var(--muted); font-size:13.5px; line-height:1.55;">KPIs, dashboards, and clear acceptance criteria from day one.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title reveal">Let’s talk</h2>
+        <p class="section-desc reveal" style="transition-delay:.06s">
+          Tell us what you’re trying to accomplish and what’s getting in the way. We’ll respond with next steps and a clear path forward.
+        </p>
+
+        <div class="grid two" style="align-items:start;">
+          <div class="card reveal">
+            <h3 style="margin-top:0;">Request a consultation</h3>
+            <form id="contactForm">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" placeholder="Your name" required />
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+
+              <label for="org">Organization</label>
+              <input id="org" name="org" autocomplete="organization" placeholder="Agency / Company" />
+
+              <label for="msg">What do you need?</label>
+              <textarea id="msg" name="msg" placeholder="Briefly describe your goals, environment, and timeline." required></textarea>
+
+              <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+                <button class="btn primary" type="submit">Send message</button>
+                <a class="btn" href="mailto:hello@cyghthound.com?subject=Consultation%20Request%20-%20CyghtHound">Email instead</a>
+              </div>
+
+              <p class="fine" style="margin-top:12px;">This form opens your email client by default (no backend required). When you add hosting, connect it to a form service or API endpoint.</p>
+            </form>
+          </div>
+
+          <div class="card reveal" style="transition-delay:.06s">
+            <h3 style="margin-top:0;">Quick info</h3>
+            <p style="margin:0; color:var(--muted); line-height:1.6;">
+              <strong style="color:var(--text);">NAICS:</strong> 541512, 541513, 541519, 541611, 518210 (update as needed)<br>
+              <strong style="color:var(--text);">Contracting:</strong> Prime or subcontract • SDVOSB set-asides supported<br>
+              <strong style="color:var(--text);">Core focus:</strong> Cybersecurity, Cloud, DevSecOps, SOC Operations
+            </p>
+
+            <div style="margin-top:18px;" class="grid">
+              <div class="card" style="padding:14px; background: rgba(0,0,0,.12);">
+                <div style="font-weight:900;">Capabilities snapshot</div>
+                <div style="color:var(--muted); font-size:13.5px; line-height:1.6; margin-top:6px;">
+                  • Assessments & roadmaps<br>
+                  • Secure architecture & implementation<br>
+                  • Logging/detection engineering<br>
+                  • Compliance evidence workflows<br>
+                  • Operational handoff & training
+                </div>
+              </div>
+              <div class="card" style="padding:14px; background: rgba(0,0,0,.12);">
+                <div style="font-weight:900;">Security posture improvements</div>
+                <div style="color:var(--muted); font-size:13.5px; line-height:1.6; margin-top:6px;">
+                  Reduce attack surface • Improve visibility • Accelerate IR • Harden CI/CD • Standardize controls
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;">
+              <a class="btn" href="#services">View service catalog</a>
+              <a class="btn primary" href="#top">Back to top</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="grid two" style="align-items:center;">
+        <div class="brand">
+          <img src="CyghtHound.JPG" alt="CyghtHound logo" />
+          <div class="name">
+            <strong>CyghtHound</strong>
+            <span>SDVOSB • IT Services & Consulting</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+          <a class="btn" href="#services">Services</a>
+          <a class="btn" href="#solutions">Solutions</a>
+          <a class="btn" href="#contact">Contact</a>
+        </div>
+      </div>
+      <p class="fine" style="margin-top:14px;">
+        © <span id="year"></span> CyghtHound. All rights reserved. Veteran-led SDVOSB IT Services & Consulting.
+        <br>Replace placeholders (email, NAICS, links) with your official details prior to launch.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if(!id || id.length < 2) return;
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // close drawer on nav click
+        closeDrawer();
+      });
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('on');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Drawer
+    const drawer = document.getElementById('drawer');
+    const openMenu = document.getElementById('openMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    function openDrawer(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    if(openMenu) openMenu.addEventListener('click', openDrawer);
+    if(closeMenu) closeMenu.addEventListener('click', closeDrawer);
+    drawer.addEventListener('click', (e) => { if(e.target === drawer) closeDrawer(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDrawer(); });
+
+    // Contact form: opens mail client (no backend needed)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = encodeURIComponent(data.get('name') || '');
+      const email = encodeURIComponent(data.get('email') || '');
+      const org = encodeURIComponent(data.get('org') || '');
+      const msg = encodeURIComponent(data.get('msg') || '');
+
+      const subject = `Consultation Request — ${decodeURIComponent(name) || 'New Lead'}`;
+      const body =
+`Name: ${decodeURIComponent(name)}\n` +
+`Email: ${decodeURIComponent(email)}\n` +
+`Organization: ${decodeURIComponent(org)}\n\n` +
+`${decodeURIComponent(msg)}\n\n` +
+`(Sent from cyghthound.com)`;
+
+      // Update the email address to your real inbox
+      window.location.href = `mailto:hello@cyghthound.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
+</body>
+</html>
