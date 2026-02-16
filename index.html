@@ -1,3 +1,4 @@
+<!-- ===================== index.html ===================== -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -395,6 +396,146 @@
       }
     }
 
+    /* Chatbot */
+    .chatbot{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 120;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .chatbot-toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(124,255,203,.18), rgba(122,167,255,.14));
+      color: var(--text);
+      font-weight: 900;
+      letter-spacing:.2px;
+      box-shadow: var(--shadow);
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .chatbot-toggle:hover{ transform: translateY(-1px); }
+
+    .chatbot-panel{
+      position:absolute;
+      right:0;
+      bottom: 56px;
+      width: min(380px, calc(100vw - 36px));
+      height: 520px;
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(7,10,18,.90);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:none;
+    }
+
+    .chatbot.open .chatbot-panel{ display:flex; flex-direction:column; }
+
+    .chatbot-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
+    .chatbot-head strong{ font-weight: 900; }
+    .chatbot-head span{ color: var(--muted2); font-size: 12.5px; display:block; margin-top:2px; }
+
+    .chatbot-close{
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight: 900;
+      cursor:pointer;
+    }
+
+    .chatbot-body{
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow:auto;
+      flex: 1;
+    }
+
+    .msg{
+      max-width: 86%;
+      padding:10px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      line-height:1.45;
+      font-size:13.5px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+      white-space: pre-wrap;
+    }
+    .msg.user{
+      margin-left:auto;
+      background: rgba(255,255,255,.07);
+    }
+    .msg.bot{
+      background: rgba(0,0,0,.18);
+      border-color: rgba(124,255,203,.22);
+    }
+
+    .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      padding:9px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size:12.5px;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .chip:hover{ color: var(--text); border-color: rgba(255,255,255,.18); }
+
+    .chatbot-foot{
+      padding:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .chatbot-input{
+      flex:1;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      padding:12px 12px;
+      outline:none;
+      font-weight: 600;
+    }
+
+    .chatbot-send{
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid rgba(124,255,203,.30);
+      background: rgba(124,255,203,.12);
+      color: var(--text);
+      font-weight: 900;
+      cursor:pointer;
+    }
+
+    .chatbot-send:hover{ background: rgba(124,255,203,.16); }
+
     /* Skip link */
     .skip{ position:absolute; left:-999px; top:0; }
     .skip:focus{ left:12px; top:12px; background:#000; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.2); z-index:999; }
@@ -421,11 +562,11 @@
         <a href="#services">Services</a>
         <a href="#solutions">Solutions</a>
         <a href="#process">Process</a>
-        <a href="#about">About</a>
+        <a href="about.html">About</a>
         <a href="#contact">Contact</a>
         <a href="#contact" class="btn primary" style="margin-top:14px; display:flex;">Request a consult</a>
       </div>
-      <p class="fine" style="margin-top:18px;">Tip: Place <strong>CyghtHound.JPG</strong> in the same folder as this HTML file so the logo loads automatically.</p>
+      <p class="fine" style="margin-top:18px;">Tip: Place <strong>CyghtHound.JPG</strong> and <strong>video.mp4</strong> in the same folder as this HTML file so assets load automatically.</p>
     </div>
   </div>
 
@@ -444,7 +585,7 @@
         <a href="#services">Services</a>
         <a href="#solutions">Solutions</a>
         <a href="#process">Process</a>
-        <a href="#about">About</a>
+        <a href="about.html">About</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -669,7 +810,7 @@
             <p>Define scope, validate controls, and stand up evidence workflows to reduce audit friction.</p>
             <div style="margin-top:14px; color:var(--muted2); font-size:12.5px;">Deliverables</div>
             <ul style="margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.6; font-size:13.5px;">
-              <li>Gap analysis + POA&M</li>
+              <li>Gap analysis + POA&amp;M</li>
               <li>SSP support + evidence plan</li>
               <li>Control owners + timelines</li>
             </ul>
@@ -707,7 +848,7 @@
             <div class="step">
               <div class="n">1</div>
               <div>
-                <h4>Discovery & scoping</h4>
+                <h4>Discovery &amp; scoping</h4>
                 <p>Define objectives, constraints, environments, and success metrics. Confirm what “done” means.</p>
               </div>
             </div>
@@ -716,7 +857,7 @@
             <div class="step">
               <div class="n">2</div>
               <div>
-                <h4>Assess & prioritize</h4>
+                <h4>Assess &amp; prioritize</h4>
                 <p>Inventory, risk, and quick wins. Build a prioritized backlog mapped to cost, impact, and effort.</p>
               </div>
             </div>
@@ -725,7 +866,7 @@
             <div class="step">
               <div class="n">3</div>
               <div>
-                <h4>Implement & document</h4>
+                <h4>Implement &amp; document</h4>
                 <p>Ship improvements in phases. Every change includes diagrams, runbooks, and operational handoff.</p>
               </div>
             </div>
@@ -752,7 +893,7 @@
             <div class="step">
               <div class="n">6</div>
               <div>
-                <h4>Scale & iterate</h4>
+                <h4>Scale &amp; iterate</h4>
                 <p>Repeatable patterns, templates, and automation to reduce toil and speed future delivery.</p>
               </div>
             </div>
@@ -768,7 +909,7 @@
           <div class="card reveal">
             <h2 class="section-title" style="margin:0 0 8px;">Veteran-led. Security-first. Outcome-obsessed.</h2>
             <p class="section-desc" style="margin:0;">
-              CyghtHound is an SDVOSB IT Services & Consulting firm. We bring a mission mindset to modern cyber, cloud, and operations.
+              CyghtHound is an SDVOSB IT Services &amp; Consulting firm. We bring a mission mindset to modern cyber, cloud, and operations.
               Our standard deliverables include architecture diagrams, runbooks, and control mappings — so your team can sustain progress.
             </p>
             <div style="margin-top:14px;">
@@ -867,11 +1008,11 @@
               <div class="card" style="padding:14px; background: rgba(0,0,0,.12);">
                 <div style="font-weight:900;">Capabilities snapshot</div>
                 <div style="color:var(--muted); font-size:13.5px; line-height:1.6; margin-top:6px;">
-                  • Assessments & roadmaps<br>
-                  • Secure architecture & implementation<br>
+                  • Assessments &amp; roadmaps<br>
+                  • Secure architecture &amp; implementation<br>
                   • Logging/detection engineering<br>
                   • Compliance evidence workflows<br>
-                  • Operational handoff & training
+                  • Operational handoff &amp; training
                 </div>
               </div>
               <div class="card" style="padding:14px; background: rgba(0,0,0,.12);">
@@ -892,6 +1033,40 @@
     </section>
   </main>
 
+  <!-- Chatbot (Landing Page) -->
+  <div class="chatbot" id="chatbot" aria-label="CyghtHound chatbot">
+    <button class="chatbot-toggle" id="chatbotToggle" type="button" aria-haspopup="dialog" aria-expanded="false">
+      <span aria-hidden="true">💬</span>
+      Chat with CyghtHound
+    </button>
+
+    <div class="chatbot-panel" id="chatbotPanel" role="dialog" aria-modal="false" aria-label="CyghtHound chat">
+      <div class="chatbot-head">
+        <div>
+          <strong>CyghtHound Assistant</strong>
+          <span>Ask about services, CMMC, Zero Trust, SOC, or proposal support.</span>
+        </div>
+        <button class="chatbot-close" id="chatbotClose" type="button">Close</button>
+      </div>
+
+      <div class="chatbot-body" id="chatbotBody">
+        <div class="msg bot">Hi — I’m the CyghtHound assistant. What do you need help with today?</div>
+        <div class="chip-row" id="chatbotChips" aria-label="Quick questions">
+          <button class="chip" type="button" data-q="What services do you offer?">Services</button>
+          <button class="chip" type="button" data-q="Do you help with CMMC / NIST 800-171?">CMMC / NIST</button>
+          <button class="chip" type="button" data-q="Can you improve our SOC / SIEM detections?">SOC / SIEM</button>
+          <button class="chip" type="button" data-q="Can you support a proposal as an SDVOSB?">Proposal support</button>
+          <button class="chip" type="button" data-q="How do I contact you?">Contact</button>
+        </div>
+      </div>
+
+      <div class="chatbot-foot">
+        <input class="chatbot-input" id="chatbotInput" placeholder="Type a message…" autocomplete="off" />
+        <button class="chatbot-send" id="chatbotSend" type="button">Send</button>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="container">
       <div class="grid two" style="align-items:center;">
@@ -899,7 +1074,7 @@
           <img src="CyghtHound.JPG" alt="CyghtHound logo" />
           <div class="name">
             <strong>CyghtHound</strong>
-            <span>SDVOSB • IT Services & Consulting</span>
+            <span>SDVOSB • IT Services &amp; Consulting</span>
           </div>
         </div>
         <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
@@ -909,7 +1084,7 @@
         </div>
       </div>
       <p class="fine" style="margin-top:14px;">
-        © <span id="year"></span> CyghtHound. All rights reserved. Veteran-led SDVOSB IT Services & Consulting.
+        © <span id="year"></span> CyghtHound. All rights reserved. Veteran-led SDVOSB IT Services &amp; Consulting.
         <br>Replace placeholders (email, NAICS, links) with your official details prior to launch.
       </p>
     </div>
@@ -925,7 +1100,6 @@
         if(!el) return;
         e.preventDefault();
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // close drawer on nav click
         closeDrawer();
       });
     });
@@ -974,15 +1148,125 @@
 
       const subject = `Consultation Request — ${decodeURIComponent(name) || 'New Lead'}`;
       const body =
-`Name: ${decodeURIComponent(name)}\n` +
-`Email: ${decodeURIComponent(email)}\n` +
-`Organization: ${decodeURIComponent(org)}\n\n` +
-`${decodeURIComponent(msg)}\n\n` +
-`(Sent from cyghthound.com)`;
+`Name: ${decodeURIComponent(name)}
+Email: ${decodeURIComponent(email)}
+Organization: ${decodeURIComponent(org)}
 
-      // Update the email address to your real inbox
+${decodeURIComponent(msg)}
+
+(Sent from cyghthound.com)`;
+
       window.location.href = `mailto:hello@cyghthound.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
+
+    // --- Chatbot (Landing Page) ---
+    (function(){
+      const root = document.getElementById('chatbot');
+      if(!root) return;
+
+      const toggle = document.getElementById('chatbotToggle');
+      const close  = document.getElementById('chatbotClose');
+      const body   = document.getElementById('chatbotBody');
+      const input  = document.getElementById('chatbotInput');
+      const send   = document.getElementById('chatbotSend');
+      const chips  = document.getElementById('chatbotChips');
+
+      const kb = {
+        services:
+`CyghtHound services include:
+• Cybersecurity assessments (CMMC/NIST/ISO)
+• Secure cloud & DevSecOps (AWS/Azure, IaC, CI/CD hardening)
+• SOC / SIEM / SOAR engineering (detections, automation, IR playbooks)
+• IT modernization (identity, M365 hardening, network/endpoint)
+• Compliance documentation (SSP/POA&M, evidence workflows)
+
+Want a fast package? Ask about “SOC Lift (30 Days)” or “CMMC Readiness Sprint.”`,
+        cmmc:
+`Yes. We help with CMMC readiness and NIST 800-171 alignment: scoping, gap analysis, POA&M, SSP support, and evidence collection workflows that reduce audit friction.
+
+If you tell me your environment (M365/Azure/AWS, enclaves, CUI boundaries), I can suggest a practical next step.`,
+        soc:
+`Yes. We can reduce alert fatigue and speed response by tuning detections, building detection-as-code, improving log coverage, and standing up incident workflows + KPIs.
+
+If you share your SIEM (Splunk/Sentinel/Elastic/etc.) and top pain points, I’ll recommend a 30-day SOC Lift plan.`,
+        proposal:
+`We support primes and teams as an SDVOSB partner: technical narratives, architecture diagrams, compliance mappings, staffing plans, and delivery approach.
+
+Tell me the opportunity type (DoD/Civ, set-aside, scope) and timeline.`,
+        contact:
+`Best next step: book a 30-minute discovery call via the contact form below, or email hello@cyghthound.com with a short description of your goals and timeline.`
+      };
+
+      function open(){
+        root.classList.add('open');
+        toggle.setAttribute('aria-expanded','true');
+        setTimeout(()=> input?.focus(), 50);
+      }
+      function closeChat(){
+        root.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      }
+      function scrollToBottom(){ body.scrollTop = body.scrollHeight; }
+
+      function addMsg(text, who){
+        const div = document.createElement('div');
+        div.className = `msg ${who}`;
+        div.textContent = text;
+        body.appendChild(div);
+        scrollToBottom();
+      }
+
+      function typing(){
+        const div = document.createElement('div');
+        div.className = 'msg bot';
+        div.textContent = '…';
+        div.dataset.typing = '1';
+        body.appendChild(div);
+        scrollToBottom();
+      }
+      function stopTyping(){
+        const t = body.querySelector('[data-typing="1"]');
+        if(t) t.remove();
+      }
+
+      function route(q){
+        const s = q.toLowerCase();
+        if(s.includes('cmmc') || s.includes('800-171') || s.includes('nist')) return kb.cmmc;
+        if(s.includes('soc') || s.includes('siem') || s.includes('soar') || s.includes('detection') || s.includes('alerts')) return kb.soc;
+        if(s.includes('proposal') || s.includes('rfp') || s.includes('prime') || s.includes('sub') || s.includes('set-aside') || s.includes('sdvosb')) return kb.proposal;
+        if(s.includes('contact') || s.includes('email') || s.includes('call') || s.includes('book')) return kb.contact;
+        if(s.includes('service') || s.includes('offer') || s.includes('help') || s.includes('capabil')) return kb.services;
+        return `Got it. To point you the right way:
+1) Are you Federal/SLED or commercial?
+2) What’s the top priority: CMMC/NIST, SOC/SIEM, Zero Trust, or cloud/DevSecOps?
+3) What’s your timeline?`;
+      }
+
+      function handleSend(text){
+        const q = (text || '').trim();
+        if(!q) return;
+        addMsg(q, 'user');
+        input.value = '';
+        typing();
+        setTimeout(()=>{
+          stopTyping();
+          addMsg(route(q), 'bot');
+        }, 450);
+      }
+
+      toggle.addEventListener('click', ()=> root.classList.contains('open') ? closeChat() : open());
+      close.addEventListener('click', closeChat);
+      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeChat(); });
+
+      send.addEventListener('click', ()=> handleSend(input.value));
+      input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') handleSend(input.value); });
+
+      chips.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button[data-q]');
+        if(!btn) return;
+        handleSend(btn.getAttribute('data-q'));
+      });
+    })();
   </script>
 </body>
 </html>
